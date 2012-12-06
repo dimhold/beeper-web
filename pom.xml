@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.eucsoft.hackaton1</groupId>
+	<artifactId>hackaton</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+	<name>Hackaton1</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<hibernate.version>4.1.6.Final</hibernate.version>
+
+		<warSourceDirectory>WebContent</warSourceDirectory>
+	</properties>
+
+	<dependencies>
+		<dependency>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+			</plugin>
+		</plugins>
+	</build>
+</project>
