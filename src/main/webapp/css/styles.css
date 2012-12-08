@@ -36,3 +36,105 @@ input[type=submit], input[type=button], .btn {
 	right:10px;
 	top:10px;
 }
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#signup{
+	display: none;
+	position: fixed; 
+	opacity: 1; 
+	z-index: 11000; 
+	left: 50%; 
+	margin-left: -202px; 
+	top: 200px;
+}
+
+#signup {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+    display: none;
+    padding-bottom: 2px;
+    width: 404px;
+}
+#test {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+    display: none;
+    padding: 30px;
+    width: 600px;
+}
+#test p {
+    color: #666666;
+    text-shadow: none;
+}
+#signup-header {
+    background: url("../img/hd-bg.png") repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #CCCCCC;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 18px 18px 14px;
+}
+#signup-header h2 {
+    color: #444444;
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 3px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+#signup-header p {
+    color: #444444;
+    font-size: 1.3em;
+    margin: 0;
+    text-shadow: none;
+}
+#signup .txt-fld {
+    border-bottom: 1px solid #EEEEEE;
+    padding: 14px 20px;
+    position: relative;
+    text-align: right;
+    width: 364px;
+}
+#signup .btn-fld {
+    overflow: hidden;
+    padding: 12px 20px 12px 130px;
+    width: 254px;
+}
+#signup .txt-fld label {
+    color: #222222;
+    display: block;
+    float: left;
+    font-size: 1.3em;
+    padding-top: 8px;
+    text-align: left;
+    width: 90px;
+}
+#signup .txt-fld input {
+    background: none repeat scroll 0 0 #F7F7F7;
+    border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #222222;
+    font-family: "Helvetica Neue";
+    font-size: 1.2em;
+    outline: medium none;
+    padding: 8px;
+    width: 244px;
+}
+#signup .txt-fld input.good_input {
+    background: url("../img/good.png") no-repeat scroll 236px center #DEF5E1;
+}
+#signup .txt-fld input.error_input {
+    background: none repeat scroll 0 0 #FDE0E0;
+}

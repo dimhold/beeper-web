@@ -4,15 +4,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/css/styles.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.leanModal.min.js"></script>
 <title>Beeper</title>
 </head>
 <body>
 	<div id="layout">
 		<%@include file="incl/_statistics.jsp" %>
 		<div class="right-corner">
-			<a class="btn" href="signup.do">Register</a>
+			<a class="btn" href="#signup" name="signup" rel="leanModal" >Register</a>
 		</div>
 	</div>
-</form>
+	
+	<%@include file="incl/_regForm.jsp" %>
+	<script type="text/javascript">
+	$(document).ready(function() {
+  $('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".modal_close" });
+});
+		
+	</script>
 </body>
 </html>
