@@ -1,15 +1,18 @@
 package com.eucsoft.beeper.controller;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@RequestMapping("/editPet.do")
-@SessionAttributes("pet")
+@RequestMapping("/welcome.do")
 public class AudioController {
 	
     @RequestMapping(method = RequestMethod.GET)
