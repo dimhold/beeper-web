@@ -3,13 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
 <title>Beeper</title>
 </head>
 <body>
 	<div id="layout">
+		<%@include file="incl/_statistics.jsp" %>
 		<div class="right-corner">
-			<a class="btn" href="sigup.do">Register</a>
+			<a class="btn" href="signup.do">Register</a>
 		</div>
 	</div>
 </form>
