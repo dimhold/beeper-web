@@ -14,7 +14,11 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 
-	public User createPlan(User plan) {
-		return userDAO.saveAndFlush(plan);
+	public User createUser(User user) {
+		return userDAO.saveAndFlush(user);
+	}
+	
+	public User findById(Long id) {
+		return userDAO.findOne(id);
 	}
 }
