@@ -1,4 +1,4 @@
-DROP DATABASE beeper;
+DROP DATABASE IF EXISTS beeper;
 CREATE DATABASE beeper; 
 
 USE beeper;
