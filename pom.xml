@@ -15,6 +15,8 @@
 		<hibernate.version>4.1.7.Final</hibernate.version>
 		<mysql.connector.version>5.1.21</mysql.connector.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<testing.version>6.8</testing.version>
+		<cglib.version>2.2</cglib.version>
 		<jdbc.db-vendor>MYSQL</jdbc.db-vendor>
 		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 		<jdbc.url>jdbc:mysql://localhost:3306/beeper</jdbc.url>
@@ -79,7 +81,18 @@
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
+			<version>${commons.dbcp.version}</version>
+		</dependency>
+		<dependency>
+  			<groupId>org.testng</groupId>
+  			<artifactId>testng</artifactId>
+  			<version>${testing.version}</version>
+  			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
 		</dependency>
 	</dependencies>
 
