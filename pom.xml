@@ -17,6 +17,9 @@
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<testing.version>6.8</testing.version>
 		<cglib.version>2.2</cglib.version>
+		<commons.fileupload.version>1.2.2</commons.fileupload.version>
+		<commons.io.version>2.4</commons.io.version>
+		
 		<jdbc.db-vendor>MYSQL</jdbc.db-vendor>
 		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 		<jdbc.url>jdbc:mysql://localhost:3306/beeper</jdbc.url>
@@ -93,6 +96,16 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>${cglib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons.fileupload.version}</version>
 		</dependency>
 	</dependencies>
 
