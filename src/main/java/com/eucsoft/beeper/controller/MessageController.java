@@ -2,6 +2,8 @@ package com.eucsoft.beeper.controller;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +20,16 @@ public class MessageController {
 	@Autowired
 	MessageService messageService;
 	
+	@Autowired
+	ServletContext context;
+	
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
 	@ResponseBody
     public String handleMessageUpload(@RequestParam("userId") Long userId, @RequestParam("channelId") Long channelId, @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
 				byte[] bytes = file.getBytes();
-				messageService.createNewMessage(bytes, userId, channelId);
+				messageService.createNewMessage(bytes, userId, channelId, context.getRealPath("/"));
 			} catch (IOException e) {
 				return "uploadFailure";
 			}
