@@ -1,16 +1,26 @@
 package com.eucsoft.beeper.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.websocket.StreamInbound;
+import org.apache.catalina.websocket.WebSocketServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.eucsoft.beeper.model.User;
+import com.eucsoft.beeper.service.UserService;
+
+@SuppressWarnings("serial")
 @Controller
-public class AudioController {
+public class AudioController extends WebSocketServlet {
 	
-    @RequestMapping("/vets")
-    public void processGet(@RequestParam("testParam") int testParam, ModelMap model) {
-    	System.out.println(testParam);
-    }
+	@Autowired
+	UserService userService;
+	
+    @Override
+	protected StreamInbound createWebSocketInbound(String subProtocol, HttpServletRequest request) {
+    	User user = userService.createUser(new User());
+    	return new BeeperMessageInbound(user);
+	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eucsoft.beeper.model.Message;
 import com.eucsoft.beeper.service.MessageService;
 
 @Controller
@@ -29,7 +30,8 @@ public class MessageController {
         if (!file.isEmpty()) {
             try {
 				byte[] bytes = file.getBytes();
-				messageService.createNewMessage(bytes, userId, channelId, context.getRealPath("/"));
+				Message msg = messageService.createNewMessage(bytes, userId, channelId, context.getRealPath("/"));
+				BeeperMessageInbound.broadcastAll(msg);
 			} catch (IOException e) {
 				return "uploadFailure";
 			}
