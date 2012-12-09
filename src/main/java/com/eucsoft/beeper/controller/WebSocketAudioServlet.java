@@ -5,14 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import com.eucsoft.beeper.model.User;
 import com.eucsoft.beeper.service.UserService;
 
 @SuppressWarnings("serial")
-@Controller
-public class AudioController extends WebSocketServlet {
+public class WebSocketAudioServlet extends WebSocketServlet {
 	
 	@Autowired
 	UserService userService;
