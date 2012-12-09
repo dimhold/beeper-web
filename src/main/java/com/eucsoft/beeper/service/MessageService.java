@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,10 @@ public class MessageService {
 		return messageDAO.findOne(id);
 	}
 	
-	public Message createNewMessage(byte[] data, Long userId, Long channelId) throws IOException {
+	public Message createNewMessage(byte[] data, Long userId, Long channelId, String contextPath) throws IOException {
 		Date date = new Date();
-		String name = EncoderDecoder.encode(100) + date.hashCode() + Constants.MESSAGE_FILE_EXTENSION;
-		saveFileOnServer(data, name);
+		String name = EncoderDecoder.encode(new Random().nextInt(100)) + date.hashCode() + Constants.MESSAGE_FILE_EXTENSION;
+		saveFileOnServer(data, name, contextPath);
 		
 		Message msg = new Message();
 		msg.setLocation(name);
@@ -48,9 +49,8 @@ public class MessageService {
 		return createMessage(msg);
 	}
 
-	private void saveFileOnServer(byte[] data, String name) throws IOException {
-		String uploadFolder = Constants.DATA_DIRECTORY;
-		FileOutputStream fos = new FileOutputStream(uploadFolder + File.separator + name);
+	private void saveFileOnServer(byte[] data, String name, String contextPath) throws IOException {
+		FileOutputStream fos = new FileOutputStream(contextPath + File.separator + Constants.DATA_DIRECTORY + File.separator + name);
 		fos.write(data);
 		fos.flush();
 		fos.close();
