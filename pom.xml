@@ -19,6 +19,7 @@
 		<cglib.version>2.2</cglib.version>
 		<commons.fileupload.version>1.2.2</commons.fileupload.version>
 		<commons.io.version>2.4</commons.io.version>
+		<org.apache.tomcat.version>7.0.33</org.apache.tomcat.version>
 		
 		<jdbc.db-vendor>MYSQL</jdbc.db-vendor>
 		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
@@ -106,6 +107,18 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons.fileupload.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>${org.apache.tomcat.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>${org.apache.tomcat.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
