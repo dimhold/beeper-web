@@ -39,6 +39,7 @@ public class BeeperMessageInbound extends MessageInbound {
 
 	@Override
 	protected void onTextMessage(CharBuffer message) throws IOException {
+		System.out.println(message);
 		
 	}
 
@@ -47,7 +48,7 @@ public class BeeperMessageInbound extends MessageInbound {
 			//if correct channel, but another user. TODO: optimize: loop only through the proper channel
 			if (message.getChannel().equals(connection.mUser.getChannel()) && ! message.getUser().equals(connection.mUser)) {
 				try {
-					CharBuffer buffer = CharBuffer.wrap(message.getLocation());
+					CharBuffer buffer = CharBuffer.wrap("http://192.168.1.101:8080/files/"+message.getLocation());
 					connection.getWsOutbound().writeTextMessage(buffer);
 				} catch (IOException ignore) {
 					// FIXME: Do not ignore
