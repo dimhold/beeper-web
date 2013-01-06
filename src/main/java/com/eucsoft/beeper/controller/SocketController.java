@@ -13,7 +13,7 @@ import java.nio.channels.Channel;
 import java.nio.channels.FileChannel;
 import java.util.Random;
 
-import com.eucsoft.beeper.BeeberAPI;
+import com.eucsoft.beeper.server.BeeberAPI;
 
 public class SocketController implements BeeberAPI, Runnable {
 

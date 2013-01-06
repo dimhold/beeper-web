@@ -1,4 +1,4 @@
-package com.eucsoft.beeper;
+package com.eucsoft.beeper.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,10 +12,6 @@ import com.eucsoft.beeper.controller.SocketController;
 
 public class Server {
 	
-	private static final int SERVER_PORT = 6789;
-	private static final boolean IS_SERVER_DIE = false;
-	private static final int SERVER_SOCKET_TIMEOUT = 100;
-
 	public static void main(String[] args) {
 		try {
 			ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
