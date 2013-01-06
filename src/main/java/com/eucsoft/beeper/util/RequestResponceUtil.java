@@ -17,17 +17,8 @@ public abstract class RequestResponceUtil {
 		return false;
 	}
 	
-	private static String readAction(String requestString) {
-		Matcher matcher = Pattern.compile("action: ([^,]+)").matcher(requestString);
-		if (matcher.find()) {
-			return matcher.group(1);
-		}
-		return null;
-	}
-	
 	protected static String readParam(String key, String request) {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		Matcher matcher = Pattern.compile(key + ": [^,]+)").matcher(request);
+		Matcher matcher = Pattern.compile(key + ": ([^,]+)").matcher(request);
 		if (matcher.find()) {
 			return matcher.group(1);
 		}

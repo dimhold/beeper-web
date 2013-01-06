@@ -29,14 +29,24 @@ public class Client {
 			ByteArrayOutputStream requset = new ByteArrayOutputStream();
 			int messageSize = 0;
 			
-			while (messageSize != -1) {
+			while (true) {
 				messageSize = input.read(buffer);
+				
+				if (messageSize == -1) {
+					break;
+				}
 				requset.write(buffer, 0, messageSize);
 			}
-			return requset.toByteArray();
+			
+			if (requset.size() > 0) {
+				System.out.println("Server receive: " + new String(requset.toByteArray()));
+				return requset.toByteArray();
+			} else {
+				return null;
+			}
 			
 		} catch (SocketTimeoutException e) {
-			e.printStackTrace();
+			//ignore timeout.
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +56,7 @@ public class Client {
 	
 	public void write(byte[] request) {
 		try {
+			System.out.println("Server send: " + new String(request));
 			output.write(request);
 		} catch (IOException e) {
 			e.printStackTrace();

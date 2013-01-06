@@ -12,5 +12,13 @@ public class Responce {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getAction() {
+		return this.action;
+	}
+	
+	public String getStatus() {
+		return this.status;
+	}
 
 }

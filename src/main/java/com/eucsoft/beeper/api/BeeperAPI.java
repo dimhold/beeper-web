@@ -23,6 +23,11 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	private void listenClient() {
 		while(true) {
 			byte[] requestBytes = client.read();
+
+			if (requestBytes == null) {
+				return;
+			}
+
 			Request request = RequstUtil.getRequst(requestBytes);
 			Responce responce = processClient(request);
 			sendToClient(responce);
@@ -55,6 +60,9 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	}
 	
 	private void sendToClient(Responce responce) {
+		if (responce == null) {
+			return;
+		}
 		byte[] responceBytes = ResponceUtil.toBytes(responce);
 		client.write(responceBytes);
 	}
