@@ -7,7 +7,7 @@ import com.eucsoft.beeper.user.User;
 import com.eucsoft.beeper.util.RequstReader;
 import com.eucsoft.beeper.util.ResponceReader;
 
-public abstract class BeeperAPI implements Runnable, ServerAPI{
+public abstract class BeeperAPI implements Runnable, ServerAPI {
 	
 	private Client client;
 	
