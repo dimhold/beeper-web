@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 import com.eucsoft.beeper.controller.SocketController;
 
-public class ServerApplication {
+public class Server {
 	
 	private static final int SERVER_PORT = 6789;
 	private static final boolean IS_SERVER_DIE = false;
