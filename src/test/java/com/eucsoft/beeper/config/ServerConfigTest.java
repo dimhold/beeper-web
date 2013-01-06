@@ -18,5 +18,12 @@ public class ServerConfigTest {
 		int actual = ServerConfig.getClientReadTimeout();
 		Assert.assertEquals(actual, expected);
 	}
+	
+	@Test
+	public void serverPort() {
+		int expected = 8069;
+		int actual = ServerConfig.getServerPort();
+		Assert.assertEquals(actual, expected);
+	}
 
 }

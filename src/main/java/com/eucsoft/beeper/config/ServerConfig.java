@@ -6,16 +6,23 @@ public class ServerConfig {
 
 	private static final String CONFIG_FILE = "com.eucsoft.beeper.config.config";
 	private static final ResourceBundle config = ResourceBundle.getBundle(CONFIG_FILE);
+
+	private static final int read(String key) {
+		int value = Integer.parseInt( config.getString(key) );
+		return value;
+	}
 	
+	public static int getServerPort() {
+		int serverPort = read("SERVER_PORT");
+		return serverPort;
+	}
 	public static int getServerSocketTimeout() {
-		String serverSocketTimeoutValue = config.getString("SERVER_SOCKET_TIMEOUT");
-		int serverSocketTimeout = Integer.parseInt(serverSocketTimeoutValue);
-		return serverSocketTimeout; 
+		int serverSocketTimeoutValue = read("SERVER_SOCKET_TIMEOUT");
+		return serverSocketTimeoutValue;
 	}
 	
 	public static int getClientReadTimeout() {
-		String serverSocketTimeoutValue = config.getString("CLIENT_READ_TIMEOUT");
-		int serverSocketTimeout = Integer.parseInt(serverSocketTimeoutValue);
+		int serverSocketTimeout = read("CLIENT_READ_TIMEOUT");
 		return serverSocketTimeout;
 	}
 }

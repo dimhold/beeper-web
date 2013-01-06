@@ -13,31 +13,42 @@ import com.eucsoft.beeper.controller.SocketController;
 
 public class Server {
 	
-	public static void main(String[] args) {
+	private static boolean isServerRunning = false;
+	
+	public static void start() {
+		isServerRunning = true;
+
+		init();
+	}
+	
+	public static void stop() {
+		isServerRunning = false;
+	}
+	
+	private static void init() {
 		try {
-			ServerSocket serverSocket = new ServerSocket( ServerConfig.getServerSocketTimeout() );
-			serverSocket.setSoTimeout(SERVER_SOCKET_TIMEOUT);
-			listen(serverSocket);
-		} catch (IOException e) {
+			ServerSocket serverSocket = new ServerSocket( ServerConfig.getServerPort() );
+			serverSocket.setSoTimeout( ServerConfig.getServerSocketTimeout() );
+			waitClient(serverSocket);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static void listen(ServerSocket serverSocket) throws IOException {
-		while(!IS_SERVER_DIE) {
+	private static void waitClient(ServerSocket serverSocket) throws IOException {
+		while(isServerRunning) {
 			try {
 				Socket socket = serverSocket.accept();
-				processScoket(socket);
+				processClient(socket);
 			} catch (SocketTimeoutException e) {
-//				System.out.println("timeout");
+				//ignore timeout.
 			} catch (SocketException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	private static void processScoket (Socket socket) {
-		System.out.println("Client connected");
+	private static void processClient(Socket socket) {
 		SocketController socketController = new SocketController(socket);
 		
 		Executor executor = Executors.newSingleThreadExecutor();
