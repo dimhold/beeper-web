@@ -2,6 +2,7 @@ package com.eucsoft.beeper.command;
 
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
+import com.eucsoft.beeper.user.Users;
 
 public class ConnectCommand implements Command {
 
@@ -14,8 +15,13 @@ public class ConnectCommand implements Command {
 	
 	@Override
 	public Responce process() {
-		Responce responce = new Responce();
+		Users.add(user);
 		
+		Responce responce = new Responce();
+		responce.setAction("connect");
+		responce.setStatus("200");
+		
+		return responce;
 	}
 
 }

@@ -7,6 +7,5 @@ public class ResponceUtil extends RequestResponceUtil {
 	public static byte[] toBytes(Responce responce) {
 		return null;
 	}
-
-
+	
 }
