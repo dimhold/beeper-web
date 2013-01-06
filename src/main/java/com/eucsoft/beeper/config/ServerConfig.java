@@ -25,4 +25,9 @@ public class ServerConfig {
 		int serverSocketTimeout = read("CLIENT_READ_TIMEOUT");
 		return serverSocketTimeout;
 	}
+	
+	public static int getBufferReadSize() {
+		int bufferReadSize = read("BUFFER_READ_SIZE");
+		return bufferReadSize;
+	}
 }
