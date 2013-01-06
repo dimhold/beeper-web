@@ -8,13 +8,14 @@ import java.net.SocketTimeoutException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.eucsoft.beeper.config.ServerConfig;
 import com.eucsoft.beeper.controller.SocketController;
 
 public class Server {
 	
 	public static void main(String[] args) {
 		try {
-			ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+			ServerSocket serverSocket = new ServerSocket( ServerConfig.getServerSocketTimeout() );
 			serverSocket.setSoTimeout(SERVER_SOCKET_TIMEOUT);
 			listen(serverSocket);
 		} catch (IOException e) {
