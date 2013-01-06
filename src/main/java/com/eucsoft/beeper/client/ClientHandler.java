@@ -1,6 +1,8 @@
 package com.eucsoft.beeper.client;
 
 import com.eucsoft.beeper.api.BeeperAPI;
+import com.eucsoft.beeper.command.Command;
+import com.eucsoft.beeper.command.ConnectCommand;
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
 
@@ -12,8 +14,11 @@ public class ClientHandler extends BeeperAPI {
 
 	@Override
 	public Responce onConnect(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Command command = new ConnectCommand();
+		command.setUser(user);
+		
+		Responce responce = command.process();
+		return responce;
 	}
 
 	@Override

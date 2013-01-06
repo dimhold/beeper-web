@@ -23,44 +23,47 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	private void listenClient() {
 		while(true) {
 			byte[] requestBytes = client.read();
-			Request requset = RequstUtil.getRequst(requestBytes);
-			generateEvent(requset);
+
+			if (requestBytes == null) {
+				return;
+			}
+
+			Request request = RequstUtil.getRequst(requestBytes);
+			Responce responce = processClient(request);
+			sendToClient(responce);
 		}
 	}
 	
-	private void generateEvent(Request requst) {
-		User user = requst.getUser();
-		String action = requst.getAction();
+	private Responce processClient(Request request) {
+		User user = request.getUser();
+		String action = request.getAction();
 		
 		switch (action) {
 		case "connect":
-			onConnect(user);
-			break;
+			return onConnect(user);
 		case "disconnect":
-			onDisconnect(user);
-			break;
+			return onDisconnect(user);
 		case "changeRoom":
-			onChangeRoom(user);
-			break;
+			return onChangeRoom(user);
 		case "messageStart":
-			onMessageStart(user);
-			break;
+			return onMessageStart(user);
 		case "messageEnd":
-			onMessageEnd(user);
-			break;
+			return onMessageEnd(user);
 		case "message":
 			byte[] message = null;
-			onMessage(user, message);
-			break;
-		default:
-			break;
+			return onMessage(user, message);
 		}
 		
+		Responce errorResponce = new Responce();
+		errorResponce.setStatus("400");
+		return errorResponce;
 	}
 	
 	private void sendToClient(Responce responce) {
-		ResponceUtil reader = new ResponceUtil(responce);
-		byte[] responceBytes = reader.toBytes();
+		if (responce == null) {
+			return;
+		}
+		byte[] responceBytes = ResponceUtil.toBytes(responce);
 		client.write(responceBytes);
 	}
 	

@@ -2,15 +2,17 @@ package com.eucsoft.beeper.util;
 
 import com.eucsoft.beeper.server.Responce;
 
-public class ResponceUtil {
+public class ResponceUtil extends RequestResponceUtil {
 
-	public ResponceUtil(Responce responce) {
-		// TODO Auto-generated constructor stub
+	public static byte[] toBytes(Responce responce) {
+		String action = responce.getAction();
+		String status = responce.getStatus();
+		
+		StringBuilder responceString = new StringBuilder();
+		responceString.append("action: ").append(action);
+		responceString.append(", ").append("status: ").append(status);
+		
+		return responceString.toString().getBytes();
 	}
-
-	public byte[] toBytes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
