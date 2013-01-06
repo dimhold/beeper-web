@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,30 +13,41 @@ import com.eucsoft.beeper.client.ClientHandler;
 import com.eucsoft.beeper.config.ServerConfig;
 
 public class Server {
-	
+
 	private static boolean isServerRunning = false;
+	
+	private int port;
+	private ServerSocket serverSocket;
 	
 	public static void start() {
 		isServerRunning = true;
 
-		init();
+		Server server = new Server(ServerConfig.getServerPort());
+		server.init();
+		server.waitClient();
+		server.close();
 	}
 	
 	public static void stop() {
 		isServerRunning = false;
 	}
+
 	
-	private static void init() {
+	
+	public Server(int port) {
+		this.port = port;
+	}
+	
+	private void init() {
 		try {
-			ServerSocket serverSocket = new ServerSocket( ServerConfig.getServerPort() );
+			serverSocket = new ServerSocket(port);
 			serverSocket.setSoTimeout( ServerConfig.getServerSocketTimeout() );
-			waitClient(serverSocket);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static void waitClient(ServerSocket serverSocket) throws IOException {
+	private void waitClient() {
 		while(isServerRunning) {
 			try {
 				Socket socket = serverSocket.accept();
@@ -46,16 +56,26 @@ public class Server {
 				//ignore timeout.
 			} catch (SocketException e) {
 				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 	
-	private static void processClient(Socket socket) throws IOException {
+	private void processClient(Socket socket) throws IOException {
 		Client client = new Client(socket);
 		ClientHandler handler = new ClientHandler(client);
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(handler);
+	}
+
+	private void close() {
+		try {
+			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
