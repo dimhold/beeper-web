@@ -1,7 +1,7 @@
 package com.eucsoft.beeper.api;
 
 import com.eucsoft.beeper.client.Client;
-import com.eucsoft.beeper.server.Requset;
+import com.eucsoft.beeper.server.Request;
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
 import com.eucsoft.beeper.util.RequstUtil;
@@ -23,12 +23,12 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	private void listenClient() {
 		while(true) {
 			byte[] requestBytes = client.read();
-			Requset requset = RequstUtil.getRequst(requestBytes);
+			Request requset = RequstUtil.getRequst(requestBytes);
 			generateEvent(requset);
 		}
 	}
 	
-	private void generateEvent(Requset requst) {
+	private void generateEvent(Request requst) {
 		User user = requst.getUser();
 		String action = requst.getAction();
 		
@@ -64,9 +64,8 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 		client.write(responceBytes);
 	}
 	
-	private void sendToClient(Requset requset) {
-		RequstUtil reader = new RequstUtil(requset);
-		byte[] requsetBytes = reader.toBytes();
+	private void sendToClient(Request request) {
+		byte[] requsetBytes = RequstUtil.toBytes(request);
 		client.write(requsetBytes);
 	}
 	
