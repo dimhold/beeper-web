@@ -7,6 +7,7 @@ import com.eucsoft.beeper.user.User;
 
 public class Request {
 
+	private User user;
 	private String action = "";
 	private HashMap<String, Object> params = new HashMap<String, Object>();
 	
@@ -35,8 +36,12 @@ public class Request {
 	}
 
 	public User getUser() {
-		return null;
+		return user;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 
 }

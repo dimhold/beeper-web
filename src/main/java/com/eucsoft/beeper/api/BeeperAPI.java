@@ -59,8 +59,7 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	}
 	
 	private void sendToClient(Responce responce) {
-		ResponceUtil reader = new ResponceUtil(responce);
-		byte[] responceBytes = reader.toBytes();
+		byte[] responceBytes = ResponceUtil.toBytes(responce);
 		client.write(responceBytes);
 	}
 	
