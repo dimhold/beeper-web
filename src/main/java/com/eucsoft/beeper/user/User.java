@@ -21,7 +21,12 @@ public class User {
 		return this.isFree;
 	}
 	
+	public void free() {
+		this.isFree = false;
+	}
 	
+	public void talk() {
+		this.isFree = true;
+	}
 	
-
 }

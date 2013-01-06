@@ -14,6 +14,7 @@ public class ConnectCommand implements Command {
 	
 	@Override
 	public Responce process() {
+		Responce responce = new Responce();
 		
 	}
 
