@@ -6,8 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.eucsoft.beeper.server.Request;
+import com.eucsoft.beeper.user.User;
 
-public class RequstUtil {
+public class RequstUtil extends RequestResponceUtil {
 
 	public static Request getRequst(byte[] requestBytes) {
 		if (isBinary(requestBytes)) {
@@ -31,15 +32,6 @@ public class RequstUtil {
 		return requestString.toString().getBytes();
 	}
 	
-	private static boolean isBinary(byte[] requestBytes) {
-		String request = new String(requestBytes);
-		if (request.indexOf("action") == -1) {
-			return true;
-		}
-		
-		return false;
-	}
-	
 	private static Request readBinary(byte[] requestBytes) {
 		Request request = new Request();
 		request.setAction("message");		
@@ -52,33 +44,16 @@ public class RequstUtil {
 		Request request = new Request();
 		
 		String requestString = new String(requestBytes);
+		
+		User user = buildUser(requestString);
+		request.setUser(user);
 
-		String action = readAction(requestString);
+		String action = readParam("action", requestString);
 		request.setAction(action);
 		
 		HashMap<String, Object> params = readParams(requestString);
 		request.setParams(params);
 		return request;
-	}
-	
-	private static String readAction(String requestString) {
-		Matcher matcher = Pattern.compile("action: ([^,]+)").matcher(requestString);
-		if (matcher.find()) {
-			return matcher.group(1);
-		}
-		return null;
-	}
-	
-	private static HashMap<String, Object> readParams(String request) {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		Matcher matcher = Pattern.compile("([^:, ]+): ([^,]+)").matcher(request);
-		while (matcher.find()) {
-			String key = matcher.group(1);
-			String value = matcher.group(2);
-			params.put(key, value);
-		}
-		
-		return params;
 	}
 	
 }
