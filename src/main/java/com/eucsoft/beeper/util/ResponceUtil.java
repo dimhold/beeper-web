@@ -2,9 +2,9 @@ package com.eucsoft.beeper.util;
 
 import com.eucsoft.beeper.server.Responce;
 
-public class ResponceReader {
+public class ResponceUtil {
 
-	public ResponceReader(Responce responce) {
+	public ResponceUtil(Responce responce) {
 		// TODO Auto-generated constructor stub
 	}
 

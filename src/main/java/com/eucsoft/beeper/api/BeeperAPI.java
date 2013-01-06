@@ -4,8 +4,8 @@ import com.eucsoft.beeper.client.Client;
 import com.eucsoft.beeper.server.Requset;
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
-import com.eucsoft.beeper.util.RequstReader;
-import com.eucsoft.beeper.util.ResponceReader;
+import com.eucsoft.beeper.util.RequstUtil;
+import com.eucsoft.beeper.util.ResponceUtil;
 
 public abstract class BeeperAPI implements Runnable, ServerAPI {
 	
@@ -23,9 +23,7 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	private void listenClient() {
 		while(true) {
 			byte[] requestBytes = client.read();
-			RequstReader reader = new RequstReader(requestBytes);
-			Requset requset = reader.getRequst();
-			
+			Requset requset = RequstUtil.getRequst(requestBytes);
 			generateEvent(requset);
 		}
 	}
@@ -33,6 +31,7 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	private void generateEvent(Requset requst) {
 		User user = requst.getUser();
 		String action = requst.getAction();
+		
 		switch (action) {
 		case "connect":
 			onConnect(user);
@@ -60,13 +59,13 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 	}
 	
 	private void sendToClient(Responce responce) {
-		ResponceReader reader = new ResponceReader(responce);
+		ResponceUtil reader = new ResponceUtil(responce);
 		byte[] responceBytes = reader.toBytes();
 		client.write(responceBytes);
 	}
 	
 	private void sendToClient(Requset requset) {
-		RequstReader reader = new RequstReader(requset);
+		RequstUtil reader = new RequstUtil(requset);
 		byte[] requsetBytes = reader.toBytes();
 		client.write(requsetBytes);
 	}
