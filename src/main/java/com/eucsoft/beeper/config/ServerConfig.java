@@ -4,7 +4,8 @@ import java.util.ResourceBundle;
 
 public class ServerConfig {
 
-	private static ResourceBundle config = ResourceBundle.getBundle("config");
+	private static final String CONFIG_FILE = "com.eucsoft.beeper.config.config";
+	private static final ResourceBundle config = ResourceBundle.getBundle(CONFIG_FILE);
 	
 	public static int getServerSocketTimeout() {
 		String serverSocketTimeoutValue = config.getString("SERVER_SOCKET_TIMEOUT");
