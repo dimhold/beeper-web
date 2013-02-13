@@ -1,6 +1,7 @@
 package com.eucsoft.beeper.api;
 
 import com.eucsoft.beeper.client.Client;
+import com.eucsoft.beeper.client.ClientListWrapper;
 import com.eucsoft.beeper.server.Request;
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
@@ -28,6 +29,11 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 				return;
 			}
 
+			for (Client client : ClientListWrapper.clients) {
+				if (!client.equals(this.client))
+					client.write(requestBytes);
+			}
+			
 			Request request = RequstUtil.getRequst(requestBytes);
 			Responce responce = processClient(request);
 			sendToClient(responce);

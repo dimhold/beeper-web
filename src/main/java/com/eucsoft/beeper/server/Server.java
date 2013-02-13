@@ -9,7 +9,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.eucsoft.beeper.client.Client;
+import com.eucsoft.beeper.client.ClientForViktor;
 import com.eucsoft.beeper.client.ClientHandler;
+import com.eucsoft.beeper.client.ClientListWrapper;
 import com.eucsoft.beeper.config.ServerConfig;
 
 public class Server {
@@ -63,11 +65,13 @@ public class Server {
 	}
 	
 	private void processClient(Socket socket) throws IOException {
-		Client client = new Client(socket);
+		Client client = new ClientForViktor(socket);
 		ClientHandler handler = new ClientHandler(client);
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(handler);
+		
+		ClientListWrapper.clients.add(client);
 	}
 
 	private void close() {
