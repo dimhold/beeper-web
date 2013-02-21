@@ -25,7 +25,7 @@ public class API {
 	public void connect() {
 		String expected = "action: connect, status: 200";
 		
-		client.write("id: 12312312312, action: connect, info: android 4.2".getBytes());
+		client.write("id: 12312312312, action: connect, info: android 4.2".getBytes(), false);
 		String actual = new String(client.read());
 		
 		Assert.assertEquals(actual, expected);

@@ -19,8 +19,8 @@ public class SendMessageTest {
 			Client client2 = new Client(clientSocket2);
 			//PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			//while (true) {
-				client.write("onMessageStart".getBytes());
-				client.write("blahblahblah".getBytes());
+				client.write("action: connect, id: 112233".getBytes(), false);
+				//client2.write("{action:connect,id:445566}".getBytes());
 			//}
 			//out.close();
 			//clientSocket.close();

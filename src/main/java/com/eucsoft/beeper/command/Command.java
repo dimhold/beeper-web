@@ -3,11 +3,19 @@ package com.eucsoft.beeper.command;
 import com.eucsoft.beeper.server.Responce;
 import com.eucsoft.beeper.user.User;
 
-public interface Command {
+public abstract class Command {
 	
-	public void setUser(User user);
+	private User user;
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
-	public Responce process();
+	public User getUser() {
+		return user;
+	}
+	
+	public abstract Responce process();
 	
 
 }
