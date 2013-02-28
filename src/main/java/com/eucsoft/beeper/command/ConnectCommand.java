@@ -1,7 +1,7 @@
 package com.eucsoft.beeper.command;
 
+import com.eucsoft.beeper.model.Users;
 import com.eucsoft.beeper.server.Responce;
-import com.eucsoft.beeper.user.Users;
 
 public class ConnectCommand extends Command {
 

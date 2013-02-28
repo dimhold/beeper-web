@@ -1,4 +1,4 @@
-package com.eucsoft.beeper.user;
+package com.eucsoft.beeper.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

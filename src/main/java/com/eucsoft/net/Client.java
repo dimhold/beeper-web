@@ -1,4 +1,4 @@
-package com.eucsoft.beeper.client;
+package com.eucsoft.net;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,7 +10,7 @@ import java.net.SocketTimeoutException;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
-import com.eucsoft.beeper.config.ServerConfig;
+import com.eucsoft.beeper.config.Config;
 
 public class Client {
 
@@ -29,8 +29,8 @@ public class Client {
 	
 	public byte[] read() {
 		try {
-			socket.setSoTimeout(ServerConfig.getClientReadTimeout());
-			byte[] buffer = new byte[ ServerConfig.getBufferReadSize() ];
+			socket.setSoTimeout(Config.getClientReadTimeout());
+			byte[] buffer = new byte[ Config.getBufferReadSize() ];
 			ByteArrayOutputStream requset = new ByteArrayOutputStream();
 			int messageSize = 0;
 			

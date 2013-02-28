@@ -2,7 +2,7 @@ package com.eucsoft.beeper.config;
 
 import java.util.ResourceBundle;
 
-public class ServerConfig {
+public class Config {
 
 	private static final String CONFIG_FILE = "com.eucsoft.beeper.config.config";
 	private static final ResourceBundle config = ResourceBundle.getBundle(CONFIG_FILE);

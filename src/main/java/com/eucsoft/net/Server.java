@@ -1,18 +1,15 @@
-package com.eucsoft.beeper.server;
+package com.eucsoft.net;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.eucsoft.beeper.client.Client;
-import com.eucsoft.beeper.client.ClientHandler;
-import com.eucsoft.beeper.config.ServerConfig;
+import com.eucsoft.beeper.config.Config;
+import com.eucsoft.beeper.net.ClientHandler;
 
 public class Server {
 
@@ -20,12 +17,11 @@ public class Server {
 	
 	private int port;
 	private ServerSocket serverSocket;
-	public List<Client> connectedClients = new ArrayList<Client>();
 	
 	public static void start() {
 		isServerRunning = true;
 
-		Server server = new Server(ServerConfig.getServerPort());
+		Server server = new Server(Config.getServerPort());
 		server.init();
 		server.waitClient();
 		server.close();
@@ -44,7 +40,7 @@ public class Server {
 	private void init() {
 		try {
 			serverSocket = new ServerSocket(port);
-			serverSocket.setSoTimeout( ServerConfig.getServerSocketTimeout() );
+			serverSocket.setSoTimeout( Config.getServerSocketTimeout() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,12 +63,10 @@ public class Server {
 	
 	private void processClient(Socket socket) throws IOException {
 		Client client = new Client(socket);
-		ClientHandler handler = new ClientHandler(client, this);
+		ClientHandler handler = new ClientHandler(client);
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(handler);
-		
-		connectedClients.add(client);
 	}
 
 	private void close() {

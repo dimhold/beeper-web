@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.eucsoft.beeper.model.User;
 import com.eucsoft.beeper.server.Request;
-import com.eucsoft.beeper.user.User;
 
 public class RequstUtil extends RequestResponceUtil {
 
@@ -45,9 +45,6 @@ public class RequstUtil extends RequestResponceUtil {
 		
 		String requestString = new String(requestBytes);
 		
-		User user = buildUser(requestString);
-		request.setUser(user);
-
 		String action = readParam("action", requestString);
 		request.setAction(action);
 		

@@ -1,4 +1,4 @@
-package com.eucsoft.beeper.user;
+package com.eucsoft.beeper.model;
 
 public class User {
 
@@ -6,11 +6,8 @@ public class User {
 	
 	private boolean isFree;
 	
-	private ConversationHistory history;
-	
 	public User(String userId) {
 		this.userId = userId;
-		history = new ConversationHistory();
 	}
 	
 	public String getId() {

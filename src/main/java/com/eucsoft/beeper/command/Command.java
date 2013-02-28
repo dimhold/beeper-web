@@ -1,7 +1,7 @@
 package com.eucsoft.beeper.command;
 
+import com.eucsoft.beeper.model.User;
 import com.eucsoft.beeper.server.Responce;
-import com.eucsoft.beeper.user.User;
 
 public abstract class Command {
 	

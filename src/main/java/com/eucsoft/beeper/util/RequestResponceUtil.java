@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.eucsoft.beeper.user.User;
+import com.eucsoft.beeper.model.User;
 
 public abstract class RequestResponceUtil {
 	

@@ -8,21 +8,21 @@ public class ServerConfigTest {
 	@Test
 	public void serverSocketTimeout() {
 		int expected = 100;
-		int actual = ServerConfig.getServerSocketTimeout();
+		int actual = Config.getServerSocketTimeout();
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test
 	public void clientReadTimeout() {
 		int expected = 100;
-		int actual = ServerConfig.getClientReadTimeout();
+		int actual = Config.getClientReadTimeout();
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test
 	public void serverPort() {
 		int expected = 8069;
-		int actual = ServerConfig.getServerPort();
+		int actual = Config.getServerPort();
 		Assert.assertEquals(actual, expected);
 	}
 

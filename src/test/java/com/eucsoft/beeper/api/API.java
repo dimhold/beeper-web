@@ -7,8 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.eucsoft.beeper.client.Client;
-import com.eucsoft.beeper.config.ServerConfig;
+import com.eucsoft.beeper.config.Config;
+import com.eucsoft.net.Client;
 
 //Server should be runned in the background. It is not a unit test, but integration test!
 public class API {
@@ -17,7 +17,7 @@ public class API {
 	
 	@BeforeClass
 	public void init() throws IOException {
-		Socket socket = new Socket("localhost", ServerConfig.getServerPort());
+		Socket socket = new Socket("localhost", Config.getServerPort());
 		client = new Client(socket);
 	}
 

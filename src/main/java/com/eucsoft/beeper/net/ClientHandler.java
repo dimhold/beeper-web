@@ -1,19 +1,19 @@
-package com.eucsoft.beeper.api;
+package com.eucsoft.beeper.net;
 
-import com.eucsoft.beeper.client.Client;
+import com.eucsoft.beeper.BeeperAPI;
+import com.eucsoft.beeper.model.User;
 import com.eucsoft.beeper.server.Request;
 import com.eucsoft.beeper.server.Responce;
-import com.eucsoft.beeper.server.Server;
-import com.eucsoft.beeper.user.User;
 import com.eucsoft.beeper.util.RequstUtil;
 import com.eucsoft.beeper.util.ResponceUtil;
+import com.eucsoft.net.Client;
 
-public abstract class BeeperAPI implements Runnable, ServerAPI {
+public class ClientHandler implements Runnable {
 	
 	private Client client;
-	protected Server server;
+	private BeeperAPI beeperAPI = new BeeperAPI();
 	
-	public BeeperAPI(Client client) {
+	public ClientHandler(Client client) {
 		this.client = client;
 	}
 
@@ -31,39 +31,31 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 			}
 
 			Request request = RequstUtil.getRequst(requestBytes);
-			System.out.println(request.getAction());
 			
-			if (RequstUtil.isBinary(requestBytes)) {
-				for (Client nextClient : server.connectedClients) {
-					//if (nextClient != client)
-						nextClient.write(requestBytes, true);
-				}
-			}
-			else {
-				Responce responce = processRequest(request);
-				sendResponseToClient(responce);
-			}
+			System.out.println(request.getAction());
 		}
 	}
 	
 	private Responce processRequest(Request request) {
 		User user = request.getUser();
 		String action = request.getAction();
+//		User user = Beeper.getUser(requrest.id, client)
+		
 		
 		switch (action) {
 		case "connect":
-			return onConnect(user);
+			return beeperAPI.onConnect(user);
 		case "disconnect":
-			return onDisconnect(user);
+			return beeperAPI.onDisconnect(user);
 		case "changeRoom":
-			return onChangeRoom(user);
+			return beeperAPI.onChangeRoom(user);
 		case "messageStart":
-			return onMessageStart(user);
+			return beeperAPI.onMessageStart(user);
 		case "messageEnd":
-			return onMessageEnd(user);
+			return beeperAPI.onMessageEnd(user);
 		case "message":
 			byte[] message = (byte[]) request.getParam("message");
-			return onMessage(user, message);
+			return beeperAPI.onMessage(user, message);
 		}
 		
 		Responce errorResponce = new Responce();

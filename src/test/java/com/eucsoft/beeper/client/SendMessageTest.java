@@ -6,16 +6,17 @@ import java.net.Socket;
 import org.springframework.dao.CleanupFailureDataAccessException;
 import org.testng.annotations.Test;
 
-import com.eucsoft.beeper.config.ServerConfig;
+import com.eucsoft.beeper.config.Config;
+import com.eucsoft.net.Client;
 
 public class SendMessageTest {
 
 	@Test
 	public void write() {
 		try {
-			Socket clientSocket = new Socket("localhost", ServerConfig.getServerPort());
+			Socket clientSocket = new Socket("localhost", Config.getServerPort());
 			Client client = new Client(clientSocket);
-			Socket clientSocket2 = new Socket("localhost", ServerConfig.getServerPort());
+			Socket clientSocket2 = new Socket("localhost", Config.getServerPort());
 			Client client2 = new Client(clientSocket2);
 			//PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			//while (true) {

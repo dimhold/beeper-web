@@ -2,7 +2,7 @@ package com.eucsoft.beeper.server;
 
 import java.util.HashMap;
 
-import com.eucsoft.beeper.user.User;
+import com.eucsoft.beeper.model.User;
 
 
 public class Request {

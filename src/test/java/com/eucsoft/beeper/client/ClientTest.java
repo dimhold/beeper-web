@@ -7,8 +7,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.eucsoft.beeper.config.ServerConfig;
-import com.eucsoft.beeper.server.Server;
+import com.eucsoft.beeper.config.Config;
+import com.eucsoft.net.Client;
+import com.eucsoft.net.Server;
 
 public class ClientTest {
 
@@ -23,7 +24,7 @@ public class ClientTest {
 	@Test
 	public void read() throws Exception {
 		System.out.println("run");
-		Socket socket = new Socket("localhost", ServerConfig.getServerPort());
+		Socket socket = new Socket("localhost", Config.getServerPort());
 		Client client = new Client(socket);
 		byte[] actual = client.read();
 		Assert.assertEquals(actual, null);
