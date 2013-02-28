@@ -1,9 +1,9 @@
 package com.eucsoft.beeper.api;
 
 import com.eucsoft.beeper.client.Client;
-import com.eucsoft.beeper.client.ClientListWrapper;
 import com.eucsoft.beeper.server.Request;
 import com.eucsoft.beeper.server.Responce;
+import com.eucsoft.beeper.server.Server;
 import com.eucsoft.beeper.user.User;
 import com.eucsoft.beeper.util.RequstUtil;
 import com.eucsoft.beeper.util.ResponceUtil;
@@ -11,6 +11,7 @@ import com.eucsoft.beeper.util.ResponceUtil;
 public abstract class BeeperAPI implements Runnable, ServerAPI {
 	
 	private Client client;
+	protected Server server;
 	
 	public BeeperAPI(Client client) {
 		this.client = client;
@@ -29,18 +30,23 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 				return;
 			}
 
-			for (Client client : ClientListWrapper.clients) {
-				if (!client.equals(this.client))
-					client.write(requestBytes);
-			}
-			
 			Request request = RequstUtil.getRequst(requestBytes);
-			Responce responce = processClient(request);
-			sendToClient(responce);
+			System.out.println(request.getAction());
+			
+			if (RequstUtil.isBinary(requestBytes)) {
+				for (Client nextClient : server.connectedClients) {
+					//if (nextClient != client)
+						nextClient.write(requestBytes, true);
+				}
+			}
+			else {
+				Responce responce = processRequest(request);
+				sendResponseToClient(responce);
+			}
 		}
 	}
 	
-	private Responce processClient(Request request) {
+	private Responce processRequest(Request request) {
 		User user = request.getUser();
 		String action = request.getAction();
 		
@@ -56,7 +62,7 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 		case "messageEnd":
 			return onMessageEnd(user);
 		case "message":
-			byte[] message = null;
+			byte[] message = (byte[]) request.getParam("message");
 			return onMessage(user, message);
 		}
 		
@@ -65,18 +71,12 @@ public abstract class BeeperAPI implements Runnable, ServerAPI {
 		return errorResponce;
 	}
 	
-	private void sendToClient(Responce responce) {
+	private void sendResponseToClient(Responce responce) {
 		if (responce == null) {
 			return;
 		}
 		byte[] responceBytes = ResponceUtil.toBytes(responce);
-		client.write(responceBytes);
+		client.write(responceBytes, false);
 	}
-	
-	private void sendToClient(Request request) {
-		byte[] requsetBytes = RequstUtil.toBytes(request);
-		client.write(requsetBytes);
-	}
-	
 
 }

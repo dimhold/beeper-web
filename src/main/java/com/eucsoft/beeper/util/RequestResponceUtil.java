@@ -8,7 +8,7 @@ import com.eucsoft.beeper.user.User;
 
 public abstract class RequestResponceUtil {
 	
-	protected static boolean isBinary(byte[] requestBytes) {
+	public static boolean isBinary(byte[] requestBytes) {
 		String request = new String(requestBytes);
 		if (request.indexOf("action") == -1) {
 			return true;
